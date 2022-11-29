@@ -7,7 +7,7 @@ function reverseString(str) {
     const reverse = str.split('').reverse().join('')
     return reverse
 }
-// console.log(reverseString('hello'))
+console.log(reverseString('hello'))
 
 //! CHALLENGE 2: VALIDATE A PALINDROME
 // Return true if palindrome and false if not
@@ -22,7 +22,7 @@ function isPalindrome(str) {
         return false
     }
 }
-// console.log(isPalindrome('hello'))
+console.log(isPalindrome('hello'))
 
 //! CHALLENGE 3: REVERSE AN INTEGER
 // Return an integer in reverse
@@ -32,7 +32,7 @@ function reverseInt(int) {
     const int2 = stringed.split('').reverse().join('')
     return int2
 }
-// console.log(reverseInt(521))
+console.log(reverseInt(521))
 
 //! CHALLENGE 4: CAPITALIZE LETTERS
 // Return a string with the first letter of every word capitalized
@@ -47,7 +47,7 @@ function capitalizeLetters(str) {
     }
     return str1.join(' ')
 }
-// console.log(capitalizeLetters('i love javascript'))
+console.log(capitalizeLetters('i love javascript'))
 
 //! CHALLENGE 5: MAX CHARACTER
 // Return the character that is most common in a string
@@ -68,7 +68,7 @@ function maxCharacter(str) {
         }
     }
 }
-// console.log(maxCharacter('javascript'))
+console.log(maxCharacter('javascript'))
 
 //! CHALLENGE 6: FIZZBUZZ
 // Write a program that prints all the numbers from 1 to 100. For multiples of 3, instead of the 
@@ -90,7 +90,7 @@ function fizzBuzz() {
         }
     }
 }
-// fizzBuzz()
+fizzBuzz()
 
 //! CHALLENGE 7: LONGEST WORD
 // Return the longest word of a string
@@ -116,7 +116,7 @@ function longestWord(sen) {
         return storage
     }
 }
-// console.log(longestWord('Hi there my name is Bradd'))
+console.log(longestWord('Hi there my name is Bradd'))
 
 //! CHALLENGE 8: ARRAY CHUNKING
 // Split an array into chunked arrays of a specific length
@@ -130,8 +130,8 @@ function chunkArray(arr, len) {
     return tempArray
 
 }
-// console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 3))
-// console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 2)) 
+console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 3))
+console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 2)) 
 
 //! CHALLENGE 9: FLATTEN ARRAY
 // Take an array of arrays and flatten to a single array
@@ -140,7 +140,7 @@ function flattenArray(arrays) {
     let join = arrays.flat()
     return join
 }
-// console.log(flattenArray([[1, 2], [3, 4], [5, 6], [7]]))
+console.log(flattenArray([[1, 2], [3, 4], [5, 6], [7]]))
 
 //! CHALLENGE 10: ANAGRAM
 // Return true if anagram and false if not
@@ -166,8 +166,8 @@ function isAnagram(str1, str2) {
     }
     return true
 }
-// console.log(isAnagram('elbow','below'))
-// console.log(isAnagram('Dormitory','dirty room##'))
+console.log(isAnagram('elbow','below'))
+console.log(isAnagram('Dormitory','dirty room##'))
 
 //! CHALLENGE 11: LETTER CHANGES
 // Change every letter of the string to the one that follows it and capitalize the vowels
@@ -181,7 +181,7 @@ function letterChanges(str) {
     .replace(/[a-zA-Z]/g, (x) =>  String.fromCharCode(x.charCodeAt(0)+1))
     .replace(/[aeiou]/g, (v) => v.toUpperCase())
 }
-// console.log(letterChanges('hello there'))
+console.log(letterChanges('hello there'))
 
 //! CHALLENGE 12: ADD ALL NUMBERS
 // Return a sum of all parameters entered regardless of the amount of numbers - NO ARRAYS
@@ -194,7 +194,7 @@ function addAll(...num) {
     }
     return sum
 }
-// console.log(addAll(2,5,6,7))
+console.log(addAll(2,5,6,7))
 
 //! CHALLENGE 13: SUM ALL PRIMES
 // Pass in a number to loop up to and add all of the prime numbers. A prime number is a whole 
@@ -202,28 +202,54 @@ function addAll(...num) {
 // ex. sumAllPrimes(10) == 17
 function sumAllPrimes(num) {
     let sumArr = []
-
-    for(let i = 0; i <= num; i++){
-        if(isPrime(i)){
-            sumArr.push(i)
+    let sum = 0
+ 
+    for (let i = 2; i <= num; i++){
+        let flag = 0
+        for(let j = 2; j < i; j++){
+            if(i % j  === 0){
+                flag = 1
+                break
+            }
         }
+        if(i > 1 && flag === 0)
+        sumArr.push(i)
     }
-    return sumArr
+ 
+    for (const value of sumArr) {
+        sum += value
+    }
+    return sum
 }
 console.log(sumAllPrimes(10))
 
 //! CHALLENGE 14: SEEK & DESTROY
 // Remove from the array whatever is in the following arguments. Return the leftover numbers in an array
 // ex. seekAndDestroy([2, 3, 4, 6, 6, 'hello'], 2, 6) == [3, 4, 'hello']
-function seekAndDestroy() {}
-
+function seekAndDestroy(arr, ...valRemove) {
+    return arr.filter(value => !valRemove.includes(value));
+}
+console.log(seekAndDestroy([2, 3, 4, 6, 6, 'hello'], 2, 6))
+   
 //! CHALLENGE 15: SORT BY HEIGHT
 // Some people are standing in a row in a park. There are trees between them which cannot be moved. 
 // Your task is to rearrange the people by their heights in a non-descending order without moving the trees.
 // ex.
 // a = [-1, 150, 190, 170, -1, -1, 160, 180]
 // sortByHeight(a) == [-1, 150, 160, 170, -1, -1, 180, 190]
-function sortByHeight() {}
+function sortByHeight(arr) {
+    const sortedArr = arr.filter(item => item !== -1).sort((a,b) => a-b)
+    let count = 0
+   
+    return arr.map(item => {
+        if (item === -1) {
+            return -1
+        } else {
+            return sortedArr[count++]
+        }
+    })
+}
+console.log(sortByHeight([-1, 150, 190, 170, -1, -1, 160, 180]))
 
 //! CHALLENGE 16: MISSING LETTERS
 // Find the missing letter in the passed letter range and return it. If all letters are present, 
@@ -232,13 +258,52 @@ function sortByHeight() {}
 // missingLetters("abce") == "d"
 // missingLetters("abcdefghjklmno") == "i"
 // missingLetters("abcdefghijklmnopqrstuvwxyz") == undefined
-function missingLetters() {}
+function missingLetters(str) {
+    for (let i = 0; i < str.length -1; i++) {
+        if (str.charCodeAt(i + 1) - str.charCodeAt(i) != 1) {
+            return String.fromCharCode(str.charCodeAt(i) + 1)
+        }
+    }
+}
+console.log(missingLetters('abce'))
+console.log(missingLetters('abcdefghjklmno'))
+console.log(missingLetters('abcdefghijklmnopqrstuvwxyz'))
 
 //! CHALLENGE 17: EVEN & ODD SUMS
 // Take in an array and return an array of the sums of even and odd numbers
 // ex.
 // evenOddSums([50, 60, 60, 45, 71]) == [170, 116]
-function evenOddSums() {}
+function evenOddSums(arr) {
+    let even = []
+    let odd = []
+ 
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i] % 2 === 0){
+            even.push(arr[i])        
+        } else {
+            odd.push(arr[i])
+        }
+    }
+ 
+    let evenSum = 0
+    let oddSum = 0
+    let newArr = []
+ 
+    for(let i = 0; i < even.length; i++){
+        evenSum += arr[i]
+ 
+    }
+ 
+    for(let i = 0; i < odd.length; i++){
+        oddSum += arr[i]
+    }
+ 
+    newArr.push(evenSum)
+    newArr.push(oddSum)
+ 
+    return newArr
+}
+console.log(evenOddSums([50, 60, 60, 45, 71]))
 
 //! Problem #18
 // There is a malfunctioning keyboard where some letter keys do not work.
@@ -266,4 +331,21 @@ function evenOddSums() {}
 // Each word only consists of lowercase English letters.
 // brokenLetters consists of distinct lowercase English letters.
 const canBeTypedWords = (text, brokenLetters) => {
+    
+    let splitText = text.split(' ')
+    let words = splitText.length
+
+    for (let i of splitText) {
+        for (let j of brokenLetters){
+            if (i.includes(j)){
+                words--
+                break
+            }
+        }
+    }
+
+    return words
 }
+console.log(canBeTypedWords("hello world", "ad"))
+console.log(canBeTypedWords("leet code", "lt"))
+console.log(canBeTypedWords("leet code", "e"))
